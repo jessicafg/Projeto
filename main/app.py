@@ -24,7 +24,7 @@ def gravar():
   quantidade = request.form['quantidade']
   validade = request.form['validade']
   categoria = request.form['categoria']
-  if nome and preco and categoria:
+  if marca and nome and preco and quantidade and validade and categoria:
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute('INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria) VALUES (%s, %s, %s, %s, %s, %s)', (marca, nome, preco, quantidade, validade, categoria))
