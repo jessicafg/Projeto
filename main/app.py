@@ -18,6 +18,7 @@ def main():
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
+  marca = request.form['marca']
   nome = request.form['nome']
   preco = request.form['preco']
   quantidade = request.form['quantidade']
@@ -26,7 +27,7 @@ def gravar():
   if nome and preco and categoria:
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria) VALUES (%s, %s, %s, %s, %s)', (marca, nome, preco, quantidade, validade,categoria))
+    cursor.execute('INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria) VALUES (%s, %s, %s, %s, %s, %s)', (marca, nome, preco, quantidade, validade, categoria))
     conn.commit()
   return render_template('index.html')
 
