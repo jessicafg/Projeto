@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    working_dir: /data
+    command: python app.py
+    links:
+      - db
+    volumes:
+      - .:/data
+    ports:
+      - "5008:5008"
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+        - "3306:3306"
