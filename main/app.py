@@ -14,7 +14,7 @@ mysql.init_app(app)
 
 @app.route('/')
 def main():
-    return render_template('index.html')
+    return render_template('cadastrar.html')
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
@@ -29,7 +29,7 @@ def gravar():
     cursor = conn.cursor()
     cursor.execute('INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria) VALUES (%s, %s, %s, %s, %s, %s)', (marca, nome, preco, quantidade, validade, categoria))
     conn.commit()
-  return render_template('index.html')
+  return render_template('cadastrar.html')
 
 
 @app.route('/listar', methods=['POST','GET'])
