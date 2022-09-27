@@ -20,11 +20,13 @@ def main():
 def gravar():
   nome = request.form['nome']
   preco = request.form['preco']
+  quantidade = request.form['quantidade']
+  validade = request.form['validade']
   categoria = request.form['categoria']
   if nome and preco and categoria:
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('insert into tbl_produto (produto_nome, produto_preco, produto_categoria) VALUES (%s, %s, %s)', (nome, preco, categoria))
+    cursor.execute('INSERT INTO tbl_produto (prod_nome, prod_preco, prod_qtd, prod_validade ,prod_categoria) VALUES (%s, %s, %s, %s, %s)', (nome, preco, quantidade, validade,categoria))
     conn.commit()
   return render_template('index.html')
 
@@ -33,7 +35,7 @@ def gravar():
 def listar():
   conn = mysql.connect()
   cursor = conn.cursor()
-  cursor.execute('select produto_nome, produto_preco, produto_categoria from tbl_produto')
+  cursor.execute('SELECT prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria from tbl_produto')
   data = cursor.fetchall()
   conn.commit()
   return render_template('lista.html', datas=data)
