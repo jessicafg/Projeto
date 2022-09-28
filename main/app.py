@@ -31,6 +31,32 @@ def gravar():
     conn.commit()
   return render_template('cadastrar.html')
 
+@app.route('/deletar', methods=['GET', 'DELETE'])
+def gravar():
+  ID = request.form['ID']
+  if ID:
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM tbl_produto WHERE prod_id = %.1f', (ID))
+    conn.commit()
+  return render_template('deletar.html')
+
+@app.route('/alterar', methods=['GET', 'PUT'])
+def gravar():
+  ID = request.form['ID']
+  marca = request.form['marca']
+  nome = request.form['nome']
+  preco = request.form['preco']
+  quantidade = request.form['quantidade']
+  validade = request.form['validade']
+  categoria = request.form['categoria']
+  if ID and marca and nome and preco and quantidade and validade and categoria:
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute('UPDATE tbl_produto SET prod_marca = %s, prod_nome = %s, prod_preco = %s, prod_qtd = %s, prod_validade = %s, prod_categoria = %s WHERE prod_id = %.1f', (marca, nome, preco, quantidade, validade, categoria, ID))
+    conn.commit()
+  return render_template('alterar.html')
+
 
 @app.route('/listar', methods=['POST','GET'])
 def listar():
